@@ -12,7 +12,7 @@ Historic OHLCV price data for trading instruments, stored as one CSV file per in
 
 ## Instrument Map
 
-82 instruments across 7 asset classes (us, eu, crypto, fx, commodity, index, etf).
+97 instruments across 7 asset classes (us, eu, crypto, fx, commodity, index, etf).
 
 | Slug | Ticker | Exchange | Asset Class | Name | Path |
 |------|--------|----------|-------------|------|------|
@@ -61,10 +61,25 @@ Historic OHLCV price data for trading instruments, stored as one CSV file per in
 | `sie` | SIE.DE | XETRA | eu | Siemens AG | [`eu/xetra/sie/`](eu/xetra/sie/) |
 | `vow3` | VOW3.DE | XETRA | eu | Volkswagen AG | [`eu/xetra/vow3/`](eu/xetra/vow3/) |
 | `zal` | ZAL.DE | XETRA | eu | Zalando SE | [`eu/xetra/zal/`](eu/xetra/zal/) |
+| `av` | AV.L | LSE | eu | Aviva plc | [`eu/lse/av/`](eu/lse/av/) |
 | `azn` | AZN.L | LSE | eu | AstraZeneca plc | [`eu/lse/azn/`](eu/lse/azn/) |
+| `barc` | BARC.L | LSE | eu | Barclays plc | [`eu/lse/barc/`](eu/lse/barc/) |
+| `bats` | BATS.L | LSE | eu | British American Tobacco plc | [`eu/lse/bats/`](eu/lse/bats/) |
 | `bp` | BP.L | LSE | eu | BP plc | [`eu/lse/bp/`](eu/lse/bp/) |
+| `cna` | CNA.L | LSE | eu | Centrica plc | [`eu/lse/cna/`](eu/lse/cna/) |
+| `dge` | DGE.L | LSE | eu | Diageo plc | [`eu/lse/dge/`](eu/lse/dge/) |
+| `glen` | GLEN.L | LSE | eu | Glencore plc | [`eu/lse/glen/`](eu/lse/glen/) |
 | `gsk` | GSK.L | LSE | eu | GSK plc | [`eu/lse/gsk/`](eu/lse/gsk/) |
+| `hsba` | HSBA.L | LSE | eu | HSBC Holdings plc | [`eu/lse/hsba/`](eu/lse/hsba/) |
+| `imb` | IMB.L | LSE | eu | Imperial Brands plc | [`eu/lse/imb/`](eu/lse/imb/) |
+| `lloy` | LLOY.L | LSE | eu | Lloyds Banking Group plc | [`eu/lse/lloy/`](eu/lse/lloy/) |
+| `lseg` | LSEG.L | LSE | eu | London Stock Exchange Group plc | [`eu/lse/lseg/`](eu/lse/lseg/) |
+| `pru` | PRU.L | LSE | eu | Prudential plc | [`eu/lse/pru/`](eu/lse/pru/) |
+| `rel` | REL.L | LSE | eu | Relx plc | [`eu/lse/rel/`](eu/lse/rel/) |
+| `rio` | RIO.L | LSE | eu | Rio Tinto Group | [`eu/lse/rio/`](eu/lse/rio/) |
 | `shel` | SHEL.L | LSE | eu | Shell plc | [`eu/lse/shel/`](eu/lse/shel/) |
+| `tsco` | TSCO.L | LSE | eu | Tesco plc | [`eu/lse/tsco/`](eu/lse/tsco/) |
+| `ulvr` | ULVR.L | LSE | eu | Unilever plc | [`eu/lse/ulvr/`](eu/lse/ulvr/) |
 | `ada-usd` | ADA-USD | YAHOO | crypto | Cardano / USD | [`crypto/yahoo/ada-usd/`](crypto/yahoo/ada-usd/) |
 | `btc-usd` | BTC-USD | YAHOO | crypto | Bitcoin / USD | [`crypto/yahoo/btc-usd/`](crypto/yahoo/btc-usd/) |
 | `doge-usd` | DOGE-USD | YAHOO | crypto | Dogecoin / USD | [`crypto/yahoo/doge-usd/`](crypto/yahoo/doge-usd/) |
