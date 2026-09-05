@@ -39,7 +39,7 @@ import yfinance as yf
 # Maps yfinance tickers to our {asset_class}/{exchange}/{ticker} paths.
 
 TICKER_META = {
-    # US stocks
+    # US stocks — NASDAQ
     'AAPL':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_aapl',   'name': 'Apple Inc.',                        'slug': 'aapl'},
     'MSFT':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_msft',   'name': 'Microsoft Corporation',             'slug': 'msft'},
     'GOOGL':  {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_googl',  'name': 'Alphabet Inc. (Class A)',           'slug': 'googl'},
@@ -47,25 +47,72 @@ TICKER_META = {
     'TSLA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_tsla',   'name': 'Tesla Inc.',                        'slug': 'tsla'},
     'NVDA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nvda',   'name': 'NVIDIA Corporation',                'slug': 'nvda'},
     'META':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_meta',   'name': 'Meta Platforms Inc.',               'slug': 'meta'},
+    'ADBE':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_adbe',   'name': 'Adobe Inc.',                        'slug': 'adbe'},
+    'CRM':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_crm',      'name': 'Salesforce Inc.',                   'slug': 'crm'},
+    'INTC':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_intc',   'name': 'Intel Corporation',                 'slug': 'intc'},
+    'AMD':    {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_amd',    'name': 'Advanced Micro Devices',            'slug': 'amd'},
+    'NFLX':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nflx',   'name': 'Netflix Inc.',                      'slug': 'nflx'},
+    'DIS':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_dis',      'name': 'The Walt Disney Company',           'slug': 'dis'},
+    'BABA':   {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_baba',     'name': 'Alibaba Group Holding',             'slug': 'baba'},
+    # US stocks — NYSE
     'BRK-B':  {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_brk-b',    'name': 'Berkshire Hathaway Inc. (Class B)', 'slug': 'brk-b'},
-    # EU stocks (yfinance uses .DE suffix for XETRA)
+    'JPM':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_jpm',      'name': 'JPMorgan Chase & Co.',              'slug': 'jpm'},
+    'V':      {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_v',        'name': 'Visa Inc.',                         'slug': 'v'},
+    'JNJ':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_jnj',      'name': 'Johnson & Johnson',                 'slug': 'jnj'},
+    'WMT':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_wmt',      'name': 'Walmart Inc.',                      'slug': 'wmt'},
+    'PG':     {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_pg',       'name': 'Procter & Gamble Co.',              'slug': 'pg'},
+    'UNH':    {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_unh',      'name': 'UnitedHealth Group',                'slug': 'unh'},
+    'HD':     {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_hd',       'name': 'The Home Depot Inc.',               'slug': 'hd'},
+    'MA':     {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_ma',       'name': 'Mastercard Inc.',                   'slug': 'ma'},
+    # EU stocks — XETRA
     'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem',     'name': 'Newmont Corporation (XETRA)',       'slug': 'nem-de'},
+    'SAP.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_sap',     'name': 'SAP SE',                            'slug': 'sap'},
+    'SIE.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_sie',     'name': 'Siemens AG',                        'slug': 'sie'},
+    'ALV.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_alv',     'name': 'Allianz SE',                        'slug': 'alv'},
+    'BMW.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_bmw',     'name': 'BMW AG',                            'slug': 'bmw'},
+    # UK stocks — LSE
+    'BP.L':   {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_bp',        'name': 'BP plc',                            'slug': 'bp'},
+    'SHEL.L': {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_shel',      'name': 'Shell plc',                         'slug': 'shel'},
+    'AZN.L':  {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_azn',       'name': 'AstraZeneca plc',                   'slug': 'azn'},
+    'GSK.L':  {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_gsk',       'name': 'GSK plc',                           'slug': 'gsk'},
     # Crypto
     'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd',  'name': 'Bitcoin / USD',          'slug': 'btc-usd'},
     'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd',  'name': 'Ethereum / USD',         'slug': 'eth-usd'},
+    'SOL-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_sol-usd',  'name': 'Solana / USD',           'slug': 'sol-usd'},
+    'XRP-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_xrp-usd',  'name': 'XRP / USD',              'slug': 'xrp-usd'},
+    'ADA-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_ada-usd',  'name': 'Cardano / USD',          'slug': 'ada-usd'},
+    'DOGE-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_doge-usd', 'name': 'Dogecoin / USD',        'slug': 'doge-usd'},
     # FX
     'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd', 'name': 'Euro / US Dollar',           'slug': 'eurusd'},
     'GBPUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gbpusd', 'name': 'British Pound / US Dollar',  'slug': 'gbpusd'},
     'JPYUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_jpyusd', 'name': 'Japanese Yen / US Dollar',   'slug': 'jpyusd'},
+    'AUDUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_audusd', 'name': 'Australian Dollar / US Dollar', 'slug': 'audusd'},
+    'USDCAD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_usdcad', 'name': 'US Dollar / Canadian Dollar',  'slug': 'usdcad'},
+    'USDCHF=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_usdchf', 'name': 'US Dollar / Swiss Franc',      'slug': 'usdchf'},
     # Commodities
     'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gold',     'name': 'Gold Futures',           'slug': 'gold'},
     'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_silver',   'name': 'Silver Futures',         'slug': 'silver'},
     'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_wti-oil',  'name': 'Crude Oil Futures (WTI)','slug': 'wti-oil'},
+    'NG=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_natgas',   'name': 'Natural Gas Futures',    'slug': 'natgas'},
+    'HG=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_copper',   'name': 'Copper Futures',         'slug': 'copper'},
     # Indices
     '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_spx',     'name': 'S&P 500 Index',              'slug': 'spx'},
     '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji',     'name': 'Dow Jones Industrial Average','slug': 'dji'},
     '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic',  'name': 'Nasdaq Composite Index',     'slug': 'ixic'},
     '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_dax',    'name': 'DAX Performance Index',      'slug': 'dax'},
+    '^FTSE':  {'asset_class': 'index', 'exchange': 'lse',    'instrument_id': 'lse_ftse',     'name': 'FTSE 100 Index',             'slug': 'ftse'},
+    '^N225':  {'asset_class': 'index', 'exchange': 'tse',    'instrument_id': 'tse_nikkei',   'name': 'Nikkei 225 Index',           'slug': 'nikkei'},
+    '^HSI':   {'asset_class': 'index', 'exchange': 'hkex',   'instrument_id': 'hkex_hsi',     'name': 'Hang Seng Index',            'slug': 'hsi'},
+    '^RUT':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_rut',     'name': 'Russell 2000 Index',         'slug': 'rut'},
+    '^VIX':   {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_vix',     'name': 'CBOE Volatility Index',      'slug': 'vix'},
+    # ETFs
+    'SPY':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_spy',      'name': 'SPDR S&P 500 ETF',          'slug': 'spy'},
+    'QQQ':    {'asset_class': 'etf', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_qqq',    'name': 'Invesco QQQ Trust (Nasdaq 100)', 'slug': 'qqq'},
+    'VTI':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_vti',      'name': 'Vanguard Total Stock Market ETF', 'slug': 'vti'},
+    'VOO':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_voo',      'name': 'Vanguard S&P 500 ETF',      'slug': 'voo'},
+    'EEM':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_eem',      'name': 'iShares MSCI Emerging Markets ETF', 'slug': 'eem'},
+    'GLD':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_gld',      'name': 'SPDR Gold Shares ETF',      'slug': 'gld'},
+    'TLT':    {'asset_class': 'etf', 'exchange': 'nyse',   'instrument_id': 'nyse_tlt',      'name': 'iShares 20+ Year Treasury Bond ETF', 'slug': 'tlt'},
 }
 
 DEFAULT_TICKERS = ['AAPL', 'MSFT', 'NEM.DE']
