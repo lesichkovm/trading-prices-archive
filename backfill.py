@@ -45,6 +45,7 @@ TICKER_META = {
     'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem'},
     # Crypto
     'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd'},
+    'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd'},
     # FX
     'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd'},
     # Commodities
