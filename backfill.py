@@ -33,28 +33,32 @@ import yfinance as yf
 
 TICKER_META = {
     # US stocks
-    'AAPL':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_aapl'},
-    'MSFT':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_msft'},
-    'GOOGL':  {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_googl'},
-    'AMZN':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_amzn'},
-    'TSLA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_tsla'},
-    'NVDA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nvda'},
-    'META':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_meta'},
-    'BRK-B':  {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_brk-b'},
+    'AAPL':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_aapl',   'name': 'Apple Inc.'},
+    'MSFT':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_msft',   'name': 'Microsoft Corporation'},
+    'GOOGL':  {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_googl',  'name': 'Alphabet Inc. (Class A)'},
+    'AMZN':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_amzn',   'name': 'Amazon.com Inc.'},
+    'TSLA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_tsla',   'name': 'Tesla Inc.'},
+    'NVDA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nvda',   'name': 'NVIDIA Corporation'},
+    'META':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_meta',   'name': 'Meta Platforms Inc.'},
+    'BRK-B':  {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_brk-b',    'name': 'Berkshire Hathaway Inc. (Class B)'},
     # EU stocks (yfinance uses .DE suffix for XETRA)
-    'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem'},
+    'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem',     'name': 'Newmont Corporation (XETRA)'},
     # Crypto
-    'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd'},
-    'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd'},
+    'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd',  'name': 'Bitcoin / USD'},
+    'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd',  'name': 'Ethereum / USD'},
     # FX
-    'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd'},
+    'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd', 'name': 'Euro / US Dollar'},
+    'GBPUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gbpusd', 'name': 'British Pound / US Dollar'},
+    'JPYUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_jpyusd', 'name': 'Japanese Yen / US Dollar'},
     # Commodities
-    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f'},
+    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f',  'name': 'Gold Futures'},
+    'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_si-f',  'name': 'Silver Futures'},
+    'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_cl-f',  'name': 'Crude Oil Futures (WTI)'},
     # Indices
-    '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_gspc'},
-    '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji'},
-    '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic'},
-    '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_gdaxi'},
+    '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_gspc',   'name': 'S&P 500 Index'},
+    '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji',    'name': 'Dow Jones Industrial Average'},
+    '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic', 'name': 'Nasdaq Composite Index'},
+    '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_gdaxi', 'name': 'DAX Performance Index'},
 }
 
 DEFAULT_TICKERS = ['AAPL', 'MSFT', 'NEM.DE']
@@ -124,9 +128,11 @@ def write_instrument(instrument_dir: Path, meta: dict, df) -> dict:
     csv_size = csv_path.stat().st_size
 
     # ─── Write README.md (metadata, renders on GitHub) ───
+    name = meta.get('name', meta['ticker_upper'])
     readme_path = instrument_dir / 'README.md'
     with open(readme_path, 'w', newline='\n', encoding='utf-8') as f:
-        f.write(f'# {meta["ticker_upper"]}\n\n')
+        f.write(f'# {name}\n\n')
+        f.write(f'**{meta["ticker_upper"]}** on {meta["exchange"].upper()} ({meta["asset_class"]})\n\n')
         f.write(f'| Field | Value |\n')
         f.write(f'|-------|-------|\n')
         f.write(f'| instrument_id | `{meta["instrument_id"]}` |\n')
@@ -146,7 +152,7 @@ def write_instrument(instrument_dir: Path, meta: dict, df) -> dict:
         f.write(f'- `date` — ISO 8601 (`YYYY-MM-DD`)\n')
         f.write(f'- `open`, `high`, `low`, `close` — raw prices\n')
         f.write(f'- `adj_close` — split/dividend-adjusted close\n')
-        f.write(f'- `volume` — trading volume\n')
+        f.write(f'- `volume` — trading volume (0 = not applicable for FX/indices)\n')
 
     # ─── Compute sha256 of the CSV ───
     with open(csv_path, 'rb') as f:

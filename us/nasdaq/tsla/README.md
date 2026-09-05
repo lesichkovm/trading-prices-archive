@@ -1,4 +1,6 @@
-# TSLA
+# Tesla Inc.
+
+**TSLA** on NASDAQ (us)
 
 | Field | Value |
 |-------|-------|
@@ -11,7 +13,7 @@
 | row_count | 4072 |
 | file_size | 253,275 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:48:53 UTC |
+| generated_at | 2026-09-05 12:56:42 UTC |
 
 ## Data
 
@@ -22,4 +24,4 @@ Columns: `date,open,high,low,close,adj_close,volume`
 - `date` — ISO 8601 (`YYYY-MM-DD`)
 - `open`, `high`, `low`, `close` — raw prices
 - `adj_close` — split/dividend-adjusted close
-- `volume` — trading volume
+- `volume` — trading volume (0 = not applicable for FX/indices)

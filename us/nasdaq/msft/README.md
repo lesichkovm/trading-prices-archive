@@ -1,4 +1,6 @@
-# MSFT
+# Microsoft Corporation
+
+**MSFT** on NASDAQ (us)
 
 | Field | Value |
 |-------|-------|
@@ -11,7 +13,7 @@
 | row_count | 6709 |
 | file_size | 419,859 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:42:49 UTC |
+| generated_at | 2026-09-05 12:56:38 UTC |
 
 ## Data
 
@@ -22,4 +24,4 @@ Columns: `date,open,high,low,close,adj_close,volume`
 - `date` — ISO 8601 (`YYYY-MM-DD`)
 - `open`, `high`, `low`, `close` — raw prices
 - `adj_close` — split/dividend-adjusted close
-- `volume` — trading volume
+- `volume` — trading volume (0 = not applicable for FX/indices)

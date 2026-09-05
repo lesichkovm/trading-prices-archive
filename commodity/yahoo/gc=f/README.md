@@ -1,4 +1,6 @@
-# GC=F
+# Gold Futures
+
+**GC=F** on YAHOO (commodity)
 
 | Field | Value |
 |-------|-------|
@@ -6,12 +8,12 @@
 | ticker | `GC=F` |
 | exchange | `YAHOO` |
 | asset_class | `commodity` |
-| first_date | `2010-01-04` |
+| first_date | `2000-08-30` |
 | last_date | `2026-09-04` |
-| row_count | 4193 |
-| file_size | 275,889 bytes |
+| row_count | 6528 |
+| file_size | 416,778 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:49:25 UTC |
+| generated_at | 2026-09-05 12:56:52 UTC |
 
 ## Data
 
@@ -22,4 +24,4 @@ Columns: `date,open,high,low,close,adj_close,volume`
 - `date` — ISO 8601 (`YYYY-MM-DD`)
 - `open`, `high`, `low`, `close` — raw prices
 - `adj_close` — split/dividend-adjusted close
-- `volume` — trading volume
+- `volume` — trading volume (0 = not applicable for FX/indices)
