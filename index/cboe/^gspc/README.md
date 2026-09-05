@@ -1,17 +1,17 @@
-# ^DJI
+# ^GSPC
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `nasdaq_^dji` |
-| ticker | `^DJI` |
-| exchange | `NASDAQ` |
-| asset_class | `us` |
+| instrument_id | `cboe_gspc` |
+| ticker | `^GSPC` |
+| exchange | `CBOE` |
+| asset_class | `index` |
 | first_date | `2010-01-04` |
 | last_date | `2026-09-04` |
 | row_count | 4194 |
-| file_size | 322,343 bytes |
+| file_size | 306,198 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:50:24 UTC |
+| generated_at | 2026-09-05 12:50:50 UTC |
 
 ## Data
 

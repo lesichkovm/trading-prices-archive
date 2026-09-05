@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-05 12:50:26",
+  "generated_at": "2026-09-05 12:50:52",
   "commit_sha": "",
   "instruments": [
     {
@@ -242,11 +242,11 @@
       "spaces_url": null
     },
     {
-      "instrument_id": "nasdaq_^gspc",
+      "instrument_id": "cboe_gspc",
       "ticker": "^GSPC",
-      "exchange": "NASDAQ",
-      "asset_class": "us",
-      "path": "us/nasdaq/^gspc/prices.csv",
+      "exchange": "CBOE",
+      "asset_class": "index",
+      "path": "index/cboe/^gspc/prices.csv",
       "first_date": "2010-01-04",
       "last_date": "2026-09-04",
       "row_count": 4194,
@@ -256,11 +256,11 @@
       "spaces_url": null
     },
     {
-      "instrument_id": "nasdaq_^dji",
+      "instrument_id": "nyse_dji",
       "ticker": "^DJI",
-      "exchange": "NASDAQ",
-      "asset_class": "us",
-      "path": "us/nasdaq/^dji/prices.csv",
+      "exchange": "NYSE",
+      "asset_class": "index",
+      "path": "index/nyse/^dji/prices.csv",
       "first_date": "2010-01-04",
       "last_date": "2026-09-04",
       "row_count": 4194,
@@ -270,11 +270,11 @@
       "spaces_url": null
     },
     {
-      "instrument_id": "nasdaq_^ixic",
+      "instrument_id": "nasdaq_ixic",
       "ticker": "^IXIC",
       "exchange": "NASDAQ",
-      "asset_class": "us",
-      "path": "us/nasdaq/^ixic/prices.csv",
+      "asset_class": "index",
+      "path": "index/nasdaq/^ixic/prices.csv",
       "first_date": "2010-01-04",
       "last_date": "2026-09-04",
       "row_count": 4194,
@@ -284,11 +284,11 @@
       "spaces_url": null
     },
     {
-      "instrument_id": "nasdaq_^gdaxi",
+      "instrument_id": "xetra_gdaxi",
       "ticker": "^GDAXI",
-      "exchange": "NASDAQ",
-      "asset_class": "us",
-      "path": "us/nasdaq/^gdaxi/prices.csv",
+      "exchange": "XETRA",
+      "asset_class": "index",
+      "path": "index/xetra/^gdaxi/prices.csv",
       "first_date": "2010-01-04",
       "last_date": "2026-09-04",
       "row_count": 4232,

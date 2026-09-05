@@ -50,6 +50,11 @@ TICKER_META = {
     'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd'},
     # Commodities
     'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f'},
+    # Indices
+    '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_gspc'},
+    '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji'},
+    '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic'},
+    '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_gdaxi'},
 }
 
 DEFAULT_TICKERS = ['AAPL', 'MSFT', 'NEM.DE']
