@@ -13,7 +13,7 @@
 | row_count | 6817 |
 | file_size | 379,214 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:46 UTC |
+| generated_at | 2026-09-05 12:59:28 UTC |
 
 ## Data
 

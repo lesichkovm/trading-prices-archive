@@ -4,14 +4,21 @@ Backfill script: downloads historic OHLCV from yfinance and writes CSV files
 in the trading-prices-archive format.
 
 Usage:
-    python backfill.py                          # backfill default tickers
-    python backfill.py AAPL MSFT GOOGL          # backfill specific tickers
-    python backfill.py --start 2010-01-01 AAPL  # from specific date
+    python backfill.py                          # update default tickers (incremental)
+    python backfill.py AAPL MSFT GOOGL          # update specific tickers
+    python backfill.py --start 2010-01-01 AAPL  # full re-download from specific date
+    python backfill.py --full AAPL              # force full re-download (ignore existing)
 
 Layout per instrument:
     {asset_class}/{exchange}/{ticker}/
         README.md     # metadata (instrument_id, ticker, exchange, date range, etc.)
         prices.csv    # pure CSV: date,open,high,low,close,adj_close,volume
+
+Incremental updates:
+    If prices.csv already exists, the script reads the last date and only
+    downloads from (last_date - 1 day) onwards. The last existing row is
+    re-downloaded in case it was revised (e.g. today's bar updated). New
+    rows are appended; the last row is replaced if it changed.
 
 This is a quick-start tool. The Go CLI (tpa) will replace it for production use.
 """
@@ -22,7 +29,7 @@ import hashlib
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import yfinance as yf
@@ -72,19 +79,19 @@ def get_meta(ticker: str) -> dict:
     t = ticker.upper()
     if t.endswith('.DE'):
         return {'asset_class': 'eu', 'exchange': 'xetra',
-                'instrument_id': f'xetra_{t.lower().replace(".", "-")}'}
+                'instrument_id': f'xetra_{t.lower().replace(".", "-")}', 'name': t}
     elif t.endswith('.L'):
         return {'asset_class': 'eu', 'exchange': 'lse',
-                'instrument_id': f'lse_{t.lower().replace(".", "-")}'}
+                'instrument_id': f'lse_{t.lower().replace(".", "-")}', 'name': t}
     elif '-USD' in t or '=X' in t:
         return {'asset_class': 'fx', 'exchange': 'yahoo',
-                'instrument_id': f'yahoo_{t.lower().replace("=", "-").replace("-", "-")}'}
+                'instrument_id': f'yahoo_{t.lower().replace("=", "-").replace("-", "-")}', 'name': t}
     elif t.endswith('=F'):
         return {'asset_class': 'commodity', 'exchange': 'yahoo',
-                'instrument_id': f'yahoo_{t.lower().replace("=f", "-f")}'}
+                'instrument_id': f'yahoo_{t.lower().replace("=f", "-f")}', 'name': t}
     else:
         return {'asset_class': 'us', 'exchange': 'nasdaq',
-                'instrument_id': f'nasdaq_{t.lower().replace(".", "-")}'}
+                'instrument_id': f'nasdaq_{t.lower().replace(".", "-")}', 'name': t}
 
 
 def normalize_ticker_for_path(ticker: str) -> str:
@@ -92,31 +99,31 @@ def normalize_ticker_for_path(ticker: str) -> str:
     return ticker.lower().replace('/', '-').replace('.', '-')
 
 
-def write_instrument(instrument_dir: Path, meta: dict, df) -> dict:
-    """Write README.md + prices.csv for one instrument. Returns manifest entry."""
+def read_existing_csv(csv_path: Path) -> tuple[str, list[list[str]]]:
+    """Read existing prices.csv. Returns (last_date, all_rows) or ('', []) if not found."""
+    if not csv_path.exists():
+        return '', []
+    with open(csv_path, 'r', newline='', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)  # skip header
+        rows = list(reader)
+    last_date = rows[-1][0] if rows else ''
+    return last_date, rows
+
+
+def write_full_csv(csv_path: Path, df) -> int:
+    """Write full CSV from a DataFrame. Returns file size."""
     import pandas as pd
 
-    instrument_dir.mkdir(parents=True, exist_ok=True)
-
-    # Format dates as YYYY-MM-DD
-    dates = df.index.strftime('%Y-%m-%d').tolist()
-
-    # Flatten multi-index columns if present
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.get_level_values(0)
 
-    first_date = dates[0] if dates else ''
-    last_date = dates[-1] if dates else ''
-    row_count = len(dates)
-
-    # ─── Write pure CSV (no comments, no metadata — just data) ───
-    csv_path = instrument_dir / 'prices.csv'
     with open(csv_path, 'w', newline='\n', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(['date', 'open', 'high', 'low', 'close', 'adj_close', 'volume'])
-        for i, date in enumerate(dates):
+        for i in range(len(df)):
             writer.writerow([
-                date,
+                df.index[i].strftime('%Y-%m-%d'),
                 f'{df["Open"].iloc[i]:.4f}',
                 f'{df["High"].iloc[i]:.4f}',
                 f'{df["Low"].iloc[i]:.4f}',
@@ -124,12 +131,65 @@ def write_instrument(instrument_dir: Path, meta: dict, df) -> dict:
                 f'{df["Adj Close"].iloc[i]:.4f}',
                 str(int(df["Volume"].iloc[i])),
             ])
+    return csv_path.stat().st_size
 
-    csv_size = csv_path.stat().st_size
 
-    # ─── Write README.md (metadata, renders on GitHub) ───
+def append_new_rows(csv_path: Path, existing_rows: list[list[str]], df) -> tuple[int, int, int]:
+    """
+    Append new rows from df to existing CSV.
+    Replaces the last existing row if the date matches (revision).
+    Returns (file_size, rows_appended, rows_replaced).
+    """
+    import pandas as pd
+
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+
+    # Build dict of new rows: {date: [row]}
+    new_rows = {}
+    for i in range(len(df)):
+        date_str = df.index[i].strftime('%Y-%m-%d')
+        new_rows[date_str] = [
+            date_str,
+            f'{df["Open"].iloc[i]:.4f}',
+            f'{df["High"].iloc[i]:.4f}',
+            f'{df["Low"].iloc[i]:.4f}',
+            f'{df["Close"].iloc[i]:.4f}',
+            f'{df["Adj Close"].iloc[i]:.4f}',
+            str(int(df["Volume"].iloc[i])),
+        ]
+
+    # Drop the last existing row if it's in the new data (revision)
+    rows_replaced = 0
+    if existing_rows and existing_rows[-1][0] in new_rows:
+        existing_rows = existing_rows[:-1]
+        rows_replaced = 1
+
+    # Append only rows with dates > last existing date
+    if existing_rows:
+        last_existing_date = existing_rows[-1][0]
+        to_append = [row for date_str, row in new_rows.items() if date_str > last_existing_date]
+    else:
+        to_append = list(new_rows.values())
+
+    # Sort by date
+    to_append.sort(key=lambda r: r[0])
+
+    # Rewrite the full file (existing + new)
+    with open(csv_path, 'w', newline='\n', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(['date', 'open', 'high', 'low', 'close', 'adj_close', 'volume'])
+        writer.writerows(existing_rows)
+        writer.writerows(to_append)
+
+    file_size = csv_path.stat().st_size
+    return file_size, len(to_append), rows_replaced
+
+
+def write_readme(readme_path: Path, meta: dict, first_date: str, last_date: str,
+                 row_count: int, csv_size: int):
+    """Write README.md with metadata."""
     name = meta.get('name', meta['ticker_upper'])
-    readme_path = instrument_dir / 'README.md'
     with open(readme_path, 'w', newline='\n', encoding='utf-8') as f:
         f.write(f'# {name}\n\n')
         f.write(f'**{meta["ticker_upper"]}** on {meta["exchange"].upper()} ({meta["asset_class"]})\n\n')
@@ -154,25 +214,24 @@ def write_instrument(instrument_dir: Path, meta: dict, df) -> dict:
         f.write(f'- `adj_close` — split/dividend-adjusted close\n')
         f.write(f'- `volume` — trading volume (0 = not applicable for FX/indices)\n')
 
-    # ─── Compute sha256 of the CSV ───
-    with open(csv_path, 'rb') as f:
-        sha256 = hashlib.sha256(f.read()).hexdigest()
 
-    ticker_path = normalize_ticker_for_path(meta['ticker_upper'])
-    return {
-        'instrument_id': meta['instrument_id'],
-        'ticker': meta['ticker_upper'],
-        'exchange': meta['exchange'].upper(),
-        'asset_class': meta['asset_class'],
-        'path': f'{meta["asset_class"]}/{meta["exchange"]}/{ticker_path}/prices.csv',
-        'first_date': first_date,
-        'last_date': last_date,
-        'row_count': row_count,
-        'file_size': csv_size,
-        'sha256': sha256,
-        'git_sha': '',
-        'spaces_url': None,
-    }
+def compute_sha256(filepath: Path) -> str:
+    h = hashlib.sha256()
+    with open(filepath, 'rb') as f:
+        for chunk in iter(lambda: f.read(8192), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def count_csv_rows(csv_path: Path) -> tuple[int, str, str]:
+    """Returns (row_count, first_date, last_date) from an existing CSV."""
+    with open(csv_path, 'r', newline='', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)  # skip header
+        rows = list(reader)
+    if not rows:
+        return 0, '', ''
+    return len(rows), rows[0][0], rows[-1][0]
 
 
 def update_manifest(repo_root: Path, entries: list):
@@ -203,46 +262,117 @@ def update_manifest(repo_root: Path, entries: list):
     print(f'  manifest.json updated ({len(existing)} instruments)')
 
 
-def backfill_ticker(ticker: str, repo_root: Path, start_date: str = None) -> dict | None:
-    """Download a ticker from yfinance and write to the repo. Returns manifest entry."""
+def backfill_ticker(ticker: str, repo_root: Path, start_date: str = None,
+                    force_full: bool = False) -> dict | None:
+    """
+    Download a ticker from yfinance and write to the repo.
+    If prices.csv exists and force_full is False, do an incremental update.
+    Returns manifest entry.
+    """
     import pandas as pd
 
     meta = get_meta(ticker)
     meta['ticker_upper'] = ticker.upper()
 
-    print(f'  Downloading {ticker} from yfinance...', end=' ', flush=True)
+    ticker_path = normalize_ticker_for_path(ticker)
+    instrument_dir = repo_root / meta['asset_class'] / meta['exchange'] / ticker_path
+    csv_path = instrument_dir / 'prices.csv'
+    readme_path = instrument_dir / 'README.md'
 
+    # ─── Check for existing data ───
+    existing_last_date, existing_rows = read_existing_csv(csv_path)
+
+    if existing_last_date and not force_full and not start_date:
+        # Incremental: download from last_date - 1 day
+        last_dt = datetime.strptime(existing_last_date, '%Y-%m-%d')
+        fetch_start = (last_dt - timedelta(days=1)).strftime('%Y-%m-%d')
+        print(f'  {ticker}: incremental from {fetch_start} (existing last_date={existing_last_date})...', end=' ', flush=True)
+    elif start_date:
+        # Explicit start date → full re-download
+        fetch_start = start_date
+        print(f'  {ticker}: full from {fetch_start}...', end=' ', flush=True)
+    else:
+        # No existing data → full history
+        fetch_start = None
+        print(f'  {ticker}: full history...', end=' ', flush=True)
+
+    # ─── Download ───
     try:
-        df = yf.download(ticker, start=start_date, progress=False, auto_adjust=False)
+        df = yf.download(ticker, start=fetch_start, progress=False, auto_adjust=False)
     except Exception as e:
         print(f'FAILED: {e}')
         return None
 
     if df is None or df.empty:
-        print('NO DATA')
+        print('NO NEW DATA')
+        # Still return existing manifest entry if we have one
+        if existing_last_date:
+            row_count, first_date, last_date = count_csv_rows(csv_path)
+            csv_size = csv_path.stat().st_size
+            return build_entry(meta, ticker_path, first_date, last_date, row_count, csv_size, csv_path)
         return None
 
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.get_level_values(0)
 
-    print(f'{len(df)} rows ({df.index[0].strftime("%Y-%m-%d")} to {df.index[-1].strftime("%Y-%m-%d")})')
+    print(f'{len(df)} rows downloaded')
 
-    ticker_path = normalize_ticker_for_path(ticker)
-    instrument_dir = repo_root / meta['asset_class'] / meta['exchange'] / ticker_path
+    # ─── Write ───
+    instrument_dir.mkdir(parents=True, exist_ok=True)
 
-    entry = write_instrument(instrument_dir, meta, df)
-    print(f'  Written: {instrument_dir.relative_to(repo_root)}/  ({entry["file_size"]:,} bytes)')
+    if existing_last_date and not force_full and not start_date:
+        # Incremental append
+        csv_size, appended, replaced = append_new_rows(csv_path, existing_rows, df)
+        if appended == 0 and replaced == 0:
+            print(f'  {ticker}: up to date (no new rows)')
+        else:
+            parts = []
+            if appended: parts.append(f'{appended} new')
+            if replaced: parts.append(f'{replaced} revised')
+            print(f'  {ticker}: {", ".join(parts)}')
+    else:
+        # Full write
+        csv_size = write_full_csv(csv_path, df)
+        print(f'  {ticker}: full write ({len(df)} rows)')
 
-    return entry
+    # ─── Read back final state ───
+    row_count, first_date, last_date = count_csv_rows(csv_path)
+
+    # ─── Write README ───
+    write_readme(readme_path, meta, first_date, last_date, row_count, csv_size)
+
+    return build_entry(meta, ticker_path, first_date, last_date, row_count, csv_size, csv_path)
+
+
+def build_entry(meta: dict, ticker_path: str, first_date: str, last_date: str,
+                row_count: int, csv_size: int, csv_path: Path) -> dict:
+    """Build a manifest entry dict."""
+    return {
+        'instrument_id': meta['instrument_id'],
+        'ticker': meta['ticker_upper'],
+        'exchange': meta['exchange'].upper(),
+        'asset_class': meta['asset_class'],
+        'path': f'{meta["asset_class"]}/{meta["exchange"]}/{ticker_path}/prices.csv',
+        'first_date': first_date,
+        'last_date': last_date,
+        'row_count': row_count,
+        'file_size': csv_size,
+        'sha256': compute_sha256(csv_path),
+        'git_sha': '',
+        'spaces_url': None,
+    }
 
 
 def main():
     parser = argparse.ArgumentParser(description='Backfill trading-prices-archive from yfinance')
     parser.add_argument('tickers', nargs='*', default=DEFAULT_TICKERS,
                         help='Tickers to backfill (default: AAPL MSFT NEM.DE)')
-    parser.add_argument('--start', default=None, help='Start date YYYY-MM-DD (default: full history)')
+    parser.add_argument('--start', default=None, help='Start date YYYY-MM-DD (forces full re-download)')
+    parser.add_argument('--full', action='store_true', help='Force full re-download (ignore existing data)')
     parser.add_argument('--repo', default='.', help='Repo root path (default: current dir)')
     args = parser.parse_args()
+
+    import pandas as pd  # noqa: F401 — needed by yfinance
 
     repo_root = Path(args.repo).resolve()
     if not (repo_root / 'README.md').exists():
@@ -250,12 +380,12 @@ def main():
 
     print(f'Repo: {repo_root}')
     print(f'Tickers: {", ".join(args.tickers)}')
-    print(f'Start date: {args.start or "full history"}')
+    print(f'Mode: {"full" if args.full or args.start else "incremental"}')
     print()
 
     entries = []
     for ticker in args.tickers:
-        entry = backfill_ticker(ticker, repo_root, args.start)
+        entry = backfill_ticker(ticker, repo_root, args.start, args.full)
         if entry:
             entries.append(entry)
 
@@ -263,7 +393,7 @@ def main():
         print()
         update_manifest(repo_root, entries)
         print()
-        print(f'Done. {len(entries)} instruments written. Run "git add -A && git commit" to publish.')
+        print(f'Done. {len(entries)} instruments processed. Run "git add -A && git commit" to publish.')
     else:
         print('No data downloaded. Check ticker symbols.')
         sys.exit(1)
