@@ -70,6 +70,23 @@ TICKER_META = {
     'SIE.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_sie',     'name': 'Siemens AG',                        'slug': 'sie'},
     'ALV.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_alv',     'name': 'Allianz SE',                        'slug': 'alv'},
     'BMW.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_bmw',     'name': 'BMW AG',                            'slug': 'bmw'},
+    'BAS.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_bas',     'name': 'BASF SE',                           'slug': 'bas'},
+    'BAYN.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_bayn',    'name': 'Bayer AG',                          'slug': 'bayn'},
+    'MBG.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_mbg',     'name': 'Mercedes-Benz Group AG',            'slug': 'mbg'},
+    'DBK.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_dbk',     'name': 'Deutsche Bank AG',                  'slug': 'dbk'},
+    'DTE.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_dte',     'name': 'Deutsche Telekom AG',               'slug': 'dte'},
+    'EOAN.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_eoan',    'name': 'E.ON SE',                           'slug': 'eoan'},
+    'MUV2.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_muv2',    'name': 'Munich Re AG',                      'slug': 'muv2'},
+    'VOW3.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_vow3',    'name': 'Volkswagen AG',                     'slug': 'vow3'},
+    'ADS.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_ads',     'name': 'adidas AG',                         'slug': 'ads'},
+    'IFX.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_ifx',     'name': 'Infineon Technologies AG',          'slug': 'ifx'},
+    'LIN.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_lin',     'name': 'Linde plc',                         'slug': 'lin'},
+    'MRK.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_mrk',     'name': 'Merck KGaA',                        'slug': 'mrk'},
+    'RWE.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_rwe',     'name': 'RWE AG',                            'slug': 'rwe'},
+    'HEN3.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_hen3',    'name': 'Henkel AG & Co. KGaA',              'slug': 'hen3'},
+    'SHL.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_shl',     'name': 'Siemens Healthineers AG',           'slug': 'shl'},
+    'DHER.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_dher',    'name': 'Delivery Hero SE',                  'slug': 'dher'},
+    'ZAL.DE':  {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_zal',     'name': 'Zalando SE',                        'slug': 'zal'},
     # UK stocks — LSE
     'BP.L':   {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_bp',        'name': 'BP plc',                            'slug': 'bp'},
     'SHEL.L': {'asset_class': 'eu', 'exchange': 'lse',    'instrument_id': 'lse_shel',      'name': 'Shell plc',                         'slug': 'shel'},
@@ -170,7 +187,7 @@ def write_full_csv(csv_path: Path, df) -> int:
         df.columns = df.columns.get_level_values(0)
 
     with open(csv_path, 'w', newline='\n', encoding='utf-8') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator='\n')
         writer.writerow(['date', 'open', 'high', 'low', 'close', 'adj_close', 'volume'])
         for i in range(len(df)):
             writer.writerow([
@@ -228,7 +245,7 @@ def append_new_rows(csv_path: Path, existing_rows: list[list[str]], df) -> tuple
 
     # Rewrite the full file (existing + new)
     with open(csv_path, 'w', newline='\n', encoding='utf-8') as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator='\n')
         writer.writerow(['date', 'open', 'high', 'low', 'close', 'adj_close', 'volume'])
         writer.writerows(existing_rows)
         writer.writerows(to_append)

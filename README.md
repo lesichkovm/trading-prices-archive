@@ -12,7 +12,7 @@ Historic OHLCV price data for trading instruments, stored as one CSV file per in
 
 ## Instrument Map
 
-65 instruments across 6 asset classes (us, eu, crypto, fx, commodity, index, etf).
+82 instruments across 7 asset classes (us, eu, crypto, fx, commodity, index, etf).
 
 | Slug | Ticker | Exchange | Asset Class | Name | Path |
 |------|--------|----------|-------------|------|------|
@@ -39,11 +39,28 @@ Historic OHLCV price data for trading instruments, stored as one CSV file per in
 | `unh` | UNH | NYSE | us | UnitedHealth Group | [`us/nyse/unh/`](us/nyse/unh/) |
 | `v` | V | NYSE | us | Visa Inc. | [`us/nyse/v/`](us/nyse/v/) |
 | `wmt` | WMT | NYSE | us | Walmart Inc. | [`us/nyse/wmt/`](us/nyse/wmt/) |
+| `ads` | ADS.DE | XETRA | eu | adidas AG | [`eu/xetra/ads/`](eu/xetra/ads/) |
 | `alv` | ALV.DE | XETRA | eu | Allianz SE | [`eu/xetra/alv/`](eu/xetra/alv/) |
+| `bas` | BAS.DE | XETRA | eu | BASF SE | [`eu/xetra/bas/`](eu/xetra/bas/) |
+| `bayn` | BAYN.DE | XETRA | eu | Bayer AG | [`eu/xetra/bayn/`](eu/xetra/bayn/) |
 | `bmw` | BMW.DE | XETRA | eu | BMW AG | [`eu/xetra/bmw/`](eu/xetra/bmw/) |
+| `dbk` | DBK.DE | XETRA | eu | Deutsche Bank AG | [`eu/xetra/dbk/`](eu/xetra/dbk/) |
+| `dher` | DHER.DE | XETRA | eu | Delivery Hero SE | [`eu/xetra/dher/`](eu/xetra/dher/) |
+| `dte` | DTE.DE | XETRA | eu | Deutsche Telekom AG | [`eu/xetra/dte/`](eu/xetra/dte/) |
+| `eoan` | EOAN.DE | XETRA | eu | E.ON SE | [`eu/xetra/eoan/`](eu/xetra/eoan/) |
+| `hen3` | HEN3.DE | XETRA | eu | Henkel AG & Co. KGaA | [`eu/xetra/hen3/`](eu/xetra/hen3/) |
+| `ifx` | IFX.DE | XETRA | eu | Infineon Technologies AG | [`eu/xetra/ifx/`](eu/xetra/ifx/) |
+| `lin` | LIN.DE | XETRA | eu | Linde plc | [`eu/xetra/lin/`](eu/xetra/lin/) |
+| `mbg` | MBG.DE | XETRA | eu | Mercedes-Benz Group AG | [`eu/xetra/mbg/`](eu/xetra/mbg/) |
+| `mrk` | MRK.DE | XETRA | eu | Merck KGaA | [`eu/xetra/mrk/`](eu/xetra/mrk/) |
+| `muv2` | MUV2.DE | XETRA | eu | Munich Re AG | [`eu/xetra/muv2/`](eu/xetra/muv2/) |
 | `nem-de` | NEM.DE | XETRA | eu | Newmont Corporation (XETRA) | [`eu/xetra/nem-de/`](eu/xetra/nem-de/) |
+| `rwe` | RWE.DE | XETRA | eu | RWE AG | [`eu/xetra/rwe/`](eu/xetra/rwe/) |
 | `sap` | SAP.DE | XETRA | eu | SAP SE | [`eu/xetra/sap/`](eu/xetra/sap/) |
+| `shl` | SHL.DE | XETRA | eu | Siemens Healthineers AG | [`eu/xetra/shl/`](eu/xetra/shl/) |
 | `sie` | SIE.DE | XETRA | eu | Siemens AG | [`eu/xetra/sie/`](eu/xetra/sie/) |
+| `vow3` | VOW3.DE | XETRA | eu | Volkswagen AG | [`eu/xetra/vow3/`](eu/xetra/vow3/) |
+| `zal` | ZAL.DE | XETRA | eu | Zalando SE | [`eu/xetra/zal/`](eu/xetra/zal/) |
 | `azn` | AZN.L | LSE | eu | AstraZeneca plc | [`eu/lse/azn/`](eu/lse/azn/) |
 | `bp` | BP.L | LSE | eu | BP plc | [`eu/lse/bp/`](eu/lse/bp/) |
 | `gsk` | GSK.L | LSE | eu | GSK plc | [`eu/lse/gsk/`](eu/lse/gsk/) |
