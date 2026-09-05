@@ -1,19 +1,19 @@
-# Silver Futures
+# Nasdaq Composite Index
 
-**SI=F** on YAHOO (commodity)
+**^IXIC** on NASDAQ (index)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_si-f` |
-| ticker | `SI=F` |
-| exchange | `YAHOO` |
-| asset_class | `commodity` |
-| first_date | `2000-08-30` |
+| instrument_id | `nasdaq_ixic` |
+| ticker | `^IXIC` |
+| exchange | `NASDAQ` |
+| asset_class | `index` |
+| first_date | `2000-01-03` |
 | last_date | `2026-09-04` |
-| row_count | 6530 |
-| file_size | 353,006 bytes |
+| row_count | 6709 |
+| file_size | 497,637 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:53 UTC |
+| generated_at | 2026-09-05 13:04:18 UTC |
 
 ## Data
 

@@ -1,19 +1,19 @@
-# Euro / US Dollar
+# S&P 500 Index
 
-**EURUSD=X** on YAHOO (fx)
+**^GSPC** on CBOE (index)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_eurusd` |
-| ticker | `EURUSD=X` |
-| exchange | `YAHOO` |
-| asset_class | `fx` |
-| first_date | `2003-12-01` |
+| instrument_id | `cboe_spx` |
+| ticker | `^GSPC` |
+| exchange | `CBOE` |
+| asset_class | `index` |
+| first_date | `2000-01-03` |
 | last_date | `2026-09-04` |
-| row_count | 5906 |
-| file_size | 289,437 bytes |
+| row_count | 6709 |
+| file_size | 487,110 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:49 UTC |
+| generated_at | 2026-09-05 13:04:15 UTC |
 
 ## Data
 

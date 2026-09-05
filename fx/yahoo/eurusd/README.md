@@ -1,19 +1,19 @@
-# British Pound / US Dollar
+# Euro / US Dollar
 
-**GBPUSD=X** on YAHOO (fx)
+**EURUSD=X** on YAHOO (fx)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_gbpusd` |
-| ticker | `GBPUSD=X` |
+| instrument_id | `yahoo_eurusd` |
+| ticker | `EURUSD=X` |
 | exchange | `YAHOO` |
 | asset_class | `fx` |
 | first_date | `2003-12-01` |
 | last_date | `2026-09-04` |
-| row_count | 5918 |
-| file_size | 290,025 bytes |
+| row_count | 5906 |
+| file_size | 289,437 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:50 UTC |
+| generated_at | 2026-09-05 13:04:08 UTC |
 
 ## Data
 

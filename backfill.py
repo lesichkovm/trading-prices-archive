@@ -40,32 +40,32 @@ import yfinance as yf
 
 TICKER_META = {
     # US stocks
-    'AAPL':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_aapl',   'name': 'Apple Inc.'},
-    'MSFT':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_msft',   'name': 'Microsoft Corporation'},
-    'GOOGL':  {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_googl',  'name': 'Alphabet Inc. (Class A)'},
-    'AMZN':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_amzn',   'name': 'Amazon.com Inc.'},
-    'TSLA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_tsla',   'name': 'Tesla Inc.'},
-    'NVDA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nvda',   'name': 'NVIDIA Corporation'},
-    'META':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_meta',   'name': 'Meta Platforms Inc.'},
-    'BRK-B':  {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_brk-b',    'name': 'Berkshire Hathaway Inc. (Class B)'},
+    'AAPL':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_aapl',   'name': 'Apple Inc.',                        'slug': 'aapl'},
+    'MSFT':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_msft',   'name': 'Microsoft Corporation',             'slug': 'msft'},
+    'GOOGL':  {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_googl',  'name': 'Alphabet Inc. (Class A)',           'slug': 'googl'},
+    'AMZN':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_amzn',   'name': 'Amazon.com Inc.',                   'slug': 'amzn'},
+    'TSLA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_tsla',   'name': 'Tesla Inc.',                        'slug': 'tsla'},
+    'NVDA':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_nvda',   'name': 'NVIDIA Corporation',                'slug': 'nvda'},
+    'META':   {'asset_class': 'us', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_meta',   'name': 'Meta Platforms Inc.',               'slug': 'meta'},
+    'BRK-B':  {'asset_class': 'us', 'exchange': 'nyse',   'instrument_id': 'nyse_brk-b',    'name': 'Berkshire Hathaway Inc. (Class B)', 'slug': 'brk-b'},
     # EU stocks (yfinance uses .DE suffix for XETRA)
-    'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem',     'name': 'Newmont Corporation (XETRA)'},
+    'NEM.DE': {'asset_class': 'eu', 'exchange': 'xetra',  'instrument_id': 'xetra_nem',     'name': 'Newmont Corporation (XETRA)',       'slug': 'nem-de'},
     # Crypto
-    'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd',  'name': 'Bitcoin / USD'},
-    'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd',  'name': 'Ethereum / USD'},
+    'BTC-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_btc-usd',  'name': 'Bitcoin / USD',          'slug': 'btc-usd'},
+    'ETH-USD': {'asset_class': 'crypto', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eth-usd',  'name': 'Ethereum / USD',         'slug': 'eth-usd'},
     # FX
-    'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd', 'name': 'Euro / US Dollar'},
-    'GBPUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gbpusd', 'name': 'British Pound / US Dollar'},
-    'JPYUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_jpyusd', 'name': 'Japanese Yen / US Dollar'},
+    'EURUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_eurusd', 'name': 'Euro / US Dollar',           'slug': 'eurusd'},
+    'GBPUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gbpusd', 'name': 'British Pound / US Dollar',  'slug': 'gbpusd'},
+    'JPYUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_jpyusd', 'name': 'Japanese Yen / US Dollar',   'slug': 'jpyusd'},
     # Commodities
-    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f',  'name': 'Gold Futures'},
-    'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_si-f',  'name': 'Silver Futures'},
-    'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_cl-f',  'name': 'Crude Oil Futures (WTI)'},
+    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f',  'name': 'Gold Futures',           'slug': 'gold'},
+    'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_si-f',  'name': 'Silver Futures',         'slug': 'silver'},
+    'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_cl-f',  'name': 'Crude Oil Futures (WTI)','slug': 'wti-oil'},
     # Indices
-    '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_gspc',   'name': 'S&P 500 Index'},
-    '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji',    'name': 'Dow Jones Industrial Average'},
-    '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic', 'name': 'Nasdaq Composite Index'},
-    '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_gdaxi', 'name': 'DAX Performance Index'},
+    '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_spx',     'name': 'S&P 500 Index',              'slug': 'spx'},
+    '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji',     'name': 'Dow Jones Industrial Average','slug': 'dji'},
+    '^IXIC':  {'asset_class': 'index', 'exchange': 'nasdaq', 'instrument_id': 'nasdaq_ixic',  'name': 'Nasdaq Composite Index',     'slug': 'ixic'},
+    '^GDAXI': {'asset_class': 'index', 'exchange': 'xetra',  'instrument_id': 'xetra_dax',    'name': 'DAX Performance Index',      'slug': 'dax'},
 }
 
 DEFAULT_TICKERS = ['AAPL', 'MSFT', 'NEM.DE']
@@ -77,21 +77,25 @@ def get_meta(ticker: str) -> dict:
         return TICKER_META[ticker]
 
     t = ticker.upper()
+    # Default slug: lowercase, strip ^, =X, =F, replace . and / with -
+    slug = t.lower().lstrip('^').replace('=x', '').replace('=f', '-f').replace('.', '-').replace('/', '-')
+    slug = slug.rstrip('-')
+
     if t.endswith('.DE'):
         return {'asset_class': 'eu', 'exchange': 'xetra',
-                'instrument_id': f'xetra_{t.lower().replace(".", "-")}', 'name': t}
+                'instrument_id': f'xetra_{slug}', 'name': t, 'slug': slug}
     elif t.endswith('.L'):
         return {'asset_class': 'eu', 'exchange': 'lse',
-                'instrument_id': f'lse_{t.lower().replace(".", "-")}', 'name': t}
+                'instrument_id': f'lse_{slug}', 'name': t, 'slug': slug}
     elif '-USD' in t or '=X' in t:
         return {'asset_class': 'fx', 'exchange': 'yahoo',
-                'instrument_id': f'yahoo_{t.lower().replace("=", "-").replace("-", "-")}', 'name': t}
+                'instrument_id': f'yahoo_{slug}', 'name': t, 'slug': slug}
     elif t.endswith('=F'):
         return {'asset_class': 'commodity', 'exchange': 'yahoo',
-                'instrument_id': f'yahoo_{t.lower().replace("=f", "-f")}', 'name': t}
+                'instrument_id': f'yahoo_{slug}', 'name': t, 'slug': slug}
     else:
         return {'asset_class': 'us', 'exchange': 'nasdaq',
-                'instrument_id': f'nasdaq_{t.lower().replace(".", "-")}', 'name': t}
+                'instrument_id': f'nasdaq_{slug}', 'name': t, 'slug': slug}
 
 
 def normalize_ticker_for_path(ticker: str) -> str:
@@ -274,8 +278,8 @@ def backfill_ticker(ticker: str, repo_root: Path, start_date: str = None,
     meta = get_meta(ticker)
     meta['ticker_upper'] = ticker.upper()
 
-    ticker_path = normalize_ticker_for_path(ticker)
-    instrument_dir = repo_root / meta['asset_class'] / meta['exchange'] / ticker_path
+    slug = meta['slug']
+    instrument_dir = repo_root / meta['asset_class'] / meta['exchange'] / slug
     csv_path = instrument_dir / 'prices.csv'
     readme_path = instrument_dir / 'README.md'
 
@@ -309,7 +313,7 @@ def backfill_ticker(ticker: str, repo_root: Path, start_date: str = None,
         if existing_last_date:
             row_count, first_date, last_date = count_csv_rows(csv_path)
             csv_size = csv_path.stat().st_size
-            return build_entry(meta, ticker_path, first_date, last_date, row_count, csv_size, csv_path)
+            return build_entry(meta, slug, first_date, last_date, row_count, csv_size, csv_path)
         return None
 
     if isinstance(df.columns, pd.MultiIndex):
@@ -341,10 +345,10 @@ def backfill_ticker(ticker: str, repo_root: Path, start_date: str = None,
     # ─── Write README ───
     write_readme(readme_path, meta, first_date, last_date, row_count, csv_size)
 
-    return build_entry(meta, ticker_path, first_date, last_date, row_count, csv_size, csv_path)
+    return build_entry(meta, slug, first_date, last_date, row_count, csv_size, csv_path)
 
 
-def build_entry(meta: dict, ticker_path: str, first_date: str, last_date: str,
+def build_entry(meta: dict, slug: str, first_date: str, last_date: str,
                 row_count: int, csv_size: int, csv_path: Path) -> dict:
     """Build a manifest entry dict."""
     return {
@@ -352,7 +356,7 @@ def build_entry(meta: dict, ticker_path: str, first_date: str, last_date: str,
         'ticker': meta['ticker_upper'],
         'exchange': meta['exchange'].upper(),
         'asset_class': meta['asset_class'],
-        'path': f'{meta["asset_class"]}/{meta["exchange"]}/{ticker_path}/prices.csv',
+        'path': f'{meta["asset_class"]}/{meta["exchange"]}/{slug}/prices.csv',
         'first_date': first_date,
         'last_date': last_date,
         'row_count': row_count,

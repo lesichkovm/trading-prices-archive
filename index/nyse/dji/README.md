@@ -1,19 +1,19 @@
-# Nasdaq Composite Index
+# Dow Jones Industrial Average
 
-**^IXIC** on NASDAQ (index)
+**^DJI** on NYSE (index)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `nasdaq_ixic` |
-| ticker | `^IXIC` |
-| exchange | `NASDAQ` |
+| instrument_id | `nyse_dji` |
+| ticker | `^DJI` |
+| exchange | `NYSE` |
 | asset_class | `index` |
 | first_date | `2000-01-03` |
 | last_date | `2026-09-04` |
 | row_count | 6709 |
-| file_size | 497,637 bytes |
+| file_size | 511,903 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:57 UTC |
+| generated_at | 2026-09-05 13:04:16 UTC |
 
 ## Data
 

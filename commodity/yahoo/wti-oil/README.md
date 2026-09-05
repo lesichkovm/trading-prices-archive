@@ -1,19 +1,19 @@
-# Dow Jones Industrial Average
+# Crude Oil Futures (WTI)
 
-**^DJI** on NYSE (index)
+**CL=F** on YAHOO (commodity)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `nyse_dji` |
-| ticker | `^DJI` |
-| exchange | `NYSE` |
-| asset_class | `index` |
-| first_date | `2000-01-03` |
+| instrument_id | `yahoo_cl-f` |
+| ticker | `CL=F` |
+| exchange | `YAHOO` |
+| asset_class | `commodity` |
+| first_date | `2000-08-23` |
 | last_date | `2026-09-04` |
-| row_count | 6709 |
-| file_size | 511,903 bytes |
+| row_count | 6537 |
+| file_size | 387,294 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:56 UTC |
+| generated_at | 2026-09-05 13:04:14 UTC |
 
 ## Data
 

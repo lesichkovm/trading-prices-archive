@@ -1,19 +1,19 @@
-# Japanese Yen / US Dollar
+# Gold Futures
 
-**JPYUSD=X** on YAHOO (fx)
+**GC=F** on YAHOO (commodity)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_jpyusd` |
-| ticker | `JPYUSD=X` |
+| instrument_id | `yahoo_gc-f` |
+| ticker | `GC=F` |
 | exchange | `YAHOO` |
-| asset_class | `fx` |
-| first_date | `2000-01-03` |
+| asset_class | `commodity` |
+| first_date | `2000-08-30` |
 | last_date | `2026-09-04` |
-| row_count | 6926 |
-| file_size | 339,417 bytes |
+| row_count | 6528 |
+| file_size | 416,778 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:51 UTC |
+| generated_at | 2026-09-05 13:04:12 UTC |
 
 ## Data
 

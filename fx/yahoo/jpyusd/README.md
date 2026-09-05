@@ -1,19 +1,19 @@
-# DAX Performance Index
+# Japanese Yen / US Dollar
 
-**^GDAXI** on XETRA (index)
+**JPYUSD=X** on YAHOO (fx)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `xetra_gdaxi` |
-| ticker | `^GDAXI` |
-| exchange | `XETRA` |
-| asset_class | `index` |
+| instrument_id | `yahoo_jpyusd` |
+| ticker | `JPYUSD=X` |
+| exchange | `YAHOO` |
+| asset_class | `fx` |
 | first_date | `2000-01-03` |
 | last_date | `2026-09-04` |
-| row_count | 6774 |
-| file_size | 497,643 bytes |
+| row_count | 6926 |
+| file_size | 339,417 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:58 UTC |
+| generated_at | 2026-09-05 13:04:11 UTC |
 
 ## Data
 

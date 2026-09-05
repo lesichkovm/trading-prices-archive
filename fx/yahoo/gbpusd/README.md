@@ -1,19 +1,19 @@
-# Gold Futures
+# British Pound / US Dollar
 
-**GC=F** on YAHOO (commodity)
+**GBPUSD=X** on YAHOO (fx)
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_gc-f` |
-| ticker | `GC=F` |
+| instrument_id | `yahoo_gbpusd` |
+| ticker | `GBPUSD=X` |
 | exchange | `YAHOO` |
-| asset_class | `commodity` |
-| first_date | `2000-08-30` |
+| asset_class | `fx` |
+| first_date | `2003-12-01` |
 | last_date | `2026-09-04` |
-| row_count | 6528 |
-| file_size | 416,778 bytes |
+| row_count | 5918 |
+| file_size | 290,025 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 12:56:52 UTC |
+| generated_at | 2026-09-05 13:04:10 UTC |
 
 ## Data
 
