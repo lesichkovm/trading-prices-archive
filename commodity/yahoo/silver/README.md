@@ -4,7 +4,7 @@
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_si-f` |
+| instrument_id | `yahoo_silver` |
 | ticker | `SI=F` |
 | exchange | `YAHOO` |
 | asset_class | `commodity` |
@@ -13,7 +13,7 @@
 | row_count | 6530 |
 | file_size | 353,006 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 13:04:13 UTC |
+| generated_at | 2026-09-05 13:06:36 UTC |
 
 ## Data
 

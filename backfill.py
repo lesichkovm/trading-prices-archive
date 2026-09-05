@@ -58,9 +58,9 @@ TICKER_META = {
     'GBPUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gbpusd', 'name': 'British Pound / US Dollar',  'slug': 'gbpusd'},
     'JPYUSD=X': {'asset_class': 'fx', 'exchange': 'yahoo', 'instrument_id': 'yahoo_jpyusd', 'name': 'Japanese Yen / US Dollar',   'slug': 'jpyusd'},
     # Commodities
-    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gc-f',  'name': 'Gold Futures',           'slug': 'gold'},
-    'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_si-f',  'name': 'Silver Futures',         'slug': 'silver'},
-    'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_cl-f',  'name': 'Crude Oil Futures (WTI)','slug': 'wti-oil'},
+    'GC=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_gold',     'name': 'Gold Futures',           'slug': 'gold'},
+    'SI=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_silver',   'name': 'Silver Futures',         'slug': 'silver'},
+    'CL=F':   {'asset_class': 'commodity', 'exchange': 'yahoo', 'instrument_id': 'yahoo_wti-oil',  'name': 'Crude Oil Futures (WTI)','slug': 'wti-oil'},
     # Indices
     '^GSPC':  {'asset_class': 'index', 'exchange': 'cboe',   'instrument_id': 'cboe_spx',     'name': 'S&P 500 Index',              'slug': 'spx'},
     '^DJI':   {'asset_class': 'index', 'exchange': 'nyse',   'instrument_id': 'nyse_dji',     'name': 'Dow Jones Industrial Average','slug': 'dji'},

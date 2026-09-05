@@ -4,7 +4,7 @@
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_gc-f` |
+| instrument_id | `yahoo_gold` |
 | ticker | `GC=F` |
 | exchange | `YAHOO` |
 | asset_class | `commodity` |
@@ -13,7 +13,7 @@
 | row_count | 6528 |
 | file_size | 416,778 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 13:04:12 UTC |
+| generated_at | 2026-09-05 13:06:35 UTC |
 
 ## Data
 

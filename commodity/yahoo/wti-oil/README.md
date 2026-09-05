@@ -4,7 +4,7 @@
 
 | Field | Value |
 |-------|-------|
-| instrument_id | `yahoo_cl-f` |
+| instrument_id | `yahoo_wti-oil` |
 | ticker | `CL=F` |
 | exchange | `YAHOO` |
 | asset_class | `commodity` |
@@ -13,7 +13,7 @@
 | row_count | 6537 |
 | file_size | 387,294 bytes |
 | schema_version | 1 |
-| generated_at | 2026-09-05 13:04:14 UTC |
+| generated_at | 2026-09-05 13:06:38 UTC |
 
 ## Data
 
