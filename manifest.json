@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-05 13:06:43",
+  "generated_at": "2026-09-05 13:13:12",
   "commit_sha": "",
   "instruments": [
     {
@@ -12,8 +12,8 @@
       "first_date": "2000-08-30",
       "last_date": "2026-09-04",
       "row_count": 6528,
-      "file_size": 416778,
-      "sha256": "998c8923feb544606a5e81b1e22732e6df5e04321d4198d1e3b832a81d85a156",
+      "file_size": 410249,
+      "sha256": "093ca0581c3986d662d3183ecf1c75d4aabffab98cfeb5cca017cc0f01412706",
       "git_sha": "",
       "spaces_url": null
     },
@@ -26,8 +26,8 @@
       "first_date": "2000-08-30",
       "last_date": "2026-09-04",
       "row_count": 6530,
-      "file_size": 353006,
-      "sha256": "e8610544fa9d005a038beb24ccacebd0bfdcfd1d48b39ef938a06f6e6559e222",
+      "file_size": 346475,
+      "sha256": "4e74808b195d9f5abec09647775096c0c2b6d4f0011e3afa67ebac81b195b5a5",
       "git_sha": "",
       "spaces_url": null
     },
@@ -40,8 +40,8 @@
       "first_date": "2000-08-23",
       "last_date": "2026-09-04",
       "row_count": 6537,
-      "file_size": 387294,
-      "sha256": "e79ff6efda889f5eac318a97d2407018d9530f159944e48504c238e800f7b51c",
+      "file_size": 380756,
+      "sha256": "5e77de16127699ea5bf300a77c914d8565960a4ebb628cf9f301e246e54de7c1",
       "git_sha": "",
       "spaces_url": null
     },
@@ -54,8 +54,8 @@
       "first_date": "2014-09-17",
       "last_date": "2026-09-05",
       "row_count": 4372,
-      "file_size": 328898,
-      "sha256": "884ff75a5c75b883be4600f319e664019384796403cd0503a1166d445591f759",
+      "file_size": 324525,
+      "sha256": "a7cdde90c616ff998069aff8c4ff109d91f5161dcacaa505c3e372f4694b6c87",
       "git_sha": "",
       "spaces_url": null
     },
@@ -68,8 +68,8 @@
       "first_date": "2017-11-09",
       "last_date": "2026-09-05",
       "row_count": 3223,
-      "file_size": 231511,
-      "sha256": "97ad940684bd2c9d0773dab834eacb030518aa797625cdb32593d85533543136",
+      "file_size": 228287,
+      "sha256": "2b6fa5ea4387b4705edb081fac698acf31749f438e08d172930832d2d6c8cfd9",
       "git_sha": "",
       "spaces_url": null
     },
@@ -82,8 +82,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6817,
-      "file_size": 379214,
-      "sha256": "44fa268e5941e5cda28697303fb4b56466cbc7f9c6c9689a9621d669c548e9bc",
+      "file_size": 372396,
+      "sha256": "3ca807c1a9160ee6974e6f98f968e183c15e9bdcc44eac3b6186dab61d7433e9",
       "git_sha": "",
       "spaces_url": null
     },
@@ -96,8 +96,8 @@
       "first_date": "2003-12-01",
       "last_date": "2026-09-04",
       "row_count": 5906,
-      "file_size": 289437,
-      "sha256": "7ed25f9f652205ad8516e3212d2db9d26f7db92229d5ea498fe1712f2f6bc018",
+      "file_size": 283530,
+      "sha256": "a46673e2b84246b8397d6536e807abc237ecf51be5aa00c4042dc8ca47c8ba21",
       "git_sha": "",
       "spaces_url": null
     },
@@ -110,8 +110,8 @@
       "first_date": "2003-12-01",
       "last_date": "2026-09-04",
       "row_count": 5918,
-      "file_size": 290025,
-      "sha256": "07ab7341cf5709d90ad9c74d1e994718602b1bb03ef5194a903c77054cef40bf",
+      "file_size": 284106,
+      "sha256": "3a598234ac36fdd1f7eb0e8ced578e24f4f149069480189b0e1782e17b6ff2b3",
       "git_sha": "",
       "spaces_url": null
     },
@@ -124,8 +124,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6926,
-      "file_size": 339417,
-      "sha256": "0311108aec2f41b1a21e2cf5559ccb7fb3445ad577f9cbbcb98ebee965a845bd",
+      "file_size": 332490,
+      "sha256": "8db5eaf585e8940186860e9590a17a8d355de64d56b2682954aa1d313f82a423",
       "git_sha": "",
       "spaces_url": null
     },
@@ -138,8 +138,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 487110,
-      "sha256": "917a2322249e015d35308cc4c7b8855778fa332466c3da086ac25c1daa895052",
+      "file_size": 480400,
+      "sha256": "1a6a401f1eedff1b52078dcc3b7930365873ef3f3520c333ec6b644790a9440b",
       "git_sha": "",
       "spaces_url": null
     },
@@ -152,8 +152,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 497637,
-      "sha256": "d7b0b0011730ad08854ecb76a8a5db13d69ec3c01f88b60760468e8049ddc520",
+      "file_size": 490927,
+      "sha256": "5da6374ccc4e7903745c888a08b448999a6721814d679dc792c2e2ccd703665c",
       "git_sha": "",
       "spaces_url": null
     },
@@ -166,8 +166,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 511903,
-      "sha256": "154338012fd59613e4f862945112ffecc94d81250e9983520c6cda247ee5a140",
+      "file_size": 505193,
+      "sha256": "0765a753bbbebcabd239498dfc657d1d0446864b7332a8ad4086ffed802ce6c9",
       "git_sha": "",
       "spaces_url": null
     },
@@ -180,8 +180,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6774,
-      "file_size": 497643,
-      "sha256": "5e30642b33706ef4dabb3ead7427a21a42bc5a7efa9ec4ff933ed893bb24753f",
+      "file_size": 490868,
+      "sha256": "99d220b4d72aaf12f5872655706b895362e7fd53ccc2dde4ba1a0e61f32830d0",
       "git_sha": "",
       "spaces_url": null
     },
@@ -194,8 +194,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 408847,
-      "sha256": "51025af55dfbb4984601e70d433ef3b4fb5f2f38e0bf78e4e9648bdccf9f3645",
+      "file_size": 402137,
+      "sha256": "55327bb6e7bb2dee77f1c0e389187b1631cc278e10d9c11a4a9d8ce770e1a6cf",
       "git_sha": "",
       "spaces_url": null
     },
@@ -208,8 +208,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 405074,
-      "sha256": "58f7580153fd46dfab5bb63556f165790c463b7c197f77b0becbaf008949a081",
+      "file_size": 398364,
+      "sha256": "6a7bf7226a722364b08d4d393670af92660bf7bd1654a1fa1de8d224a561c89c",
       "git_sha": "",
       "spaces_url": null
     },
@@ -222,8 +222,8 @@
       "first_date": "2004-08-19",
       "last_date": "2026-09-04",
       "row_count": 5547,
-      "file_size": 343687,
-      "sha256": "1849a3e859471ffbd1ed0b527c715d942c19255affdbfeb0f310c64a6cb15b28",
+      "file_size": 338139,
+      "sha256": "91b5eb1fb8b475bf76ccb626db33a1b3c9467f6255803ce3dc4c221138599832",
       "git_sha": "",
       "spaces_url": null
     },
@@ -236,8 +236,8 @@
       "first_date": "2012-05-18",
       "last_date": "2026-09-04",
       "row_count": 3595,
-      "file_size": 232729,
-      "sha256": "9b93455991a4c2b80d16c2572fd98242b499cc20f93d140f723576ecd28bb53d",
+      "file_size": 229133,
+      "sha256": "bfdedf95367d1eb82ba7cf540a1c5fd23b270628ff9371bcb3bc68921ee6157c",
       "git_sha": "",
       "spaces_url": null
     },
@@ -250,8 +250,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 419859,
-      "sha256": "4987ee0a1e2fadd9ad61281f9578df90be37a3ab501074031834b6f852000355",
+      "file_size": 413149,
+      "sha256": "fccff5e1b579ffe38dd72fd4b648e059af6c51acfe1c3deb7a8fb2d5d5a8887d",
       "git_sha": "",
       "spaces_url": null
     },
@@ -264,8 +264,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 393776,
-      "sha256": "079f75e8258381fa50147206479c3d461a275894129e2d1309501fd6085352ce",
+      "file_size": 387066,
+      "sha256": "0fe5daf970b8d14dc7ea512928f641c8ff55438bf6eb1dd2808d34d8a85c1c73",
       "git_sha": "",
       "spaces_url": null
     },
@@ -278,8 +278,8 @@
       "first_date": "2010-06-29",
       "last_date": "2026-09-04",
       "row_count": 4072,
-      "file_size": 253275,
-      "sha256": "f5f617ae75bab0650c299dc5925f424ad03c6787754adb6324ee03ee9150a5c6",
+      "file_size": 249202,
+      "sha256": "b39dfc0a4b4803b2fd2633de0c3307addee7d1c7c9bf72e3a71283b9760ca19a",
       "git_sha": "",
       "spaces_url": null
     },
@@ -292,8 +292,8 @@
       "first_date": "2000-01-03",
       "last_date": "2026-09-04",
       "row_count": 6709,
-      "file_size": 417927,
-      "sha256": "0deba2020090e1e9c7d245702ab0e6438319cbc3ceabb7e1472fe91e2eef9c3d",
+      "file_size": 411217,
+      "sha256": "d9b4e6db5e24dbb982a4907b807d4f65416e58e21df1c2fd53c813ffd4a8e2bb",
       "git_sha": "",
       "spaces_url": null
     }
