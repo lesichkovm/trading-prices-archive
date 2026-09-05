@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-05 12:42:50",
+  "commit_sha": "",
+  "instruments": [
+    {
+      "instrument_id": "nasdaq_aapl",
+      "ticker": "AAPL",
+      "exchange": "NASDAQ",
+      "asset_class": "us",
+      "path": "us/nasdaq/aapl/prices.csv",
+      "first_date": "2000-01-03",
+      "last_date": "2026-09-04",
+      "row_count": 6709,
+      "file_size": 408847,
+      "sha256": "e70e48cfd7aa3fd07f862ad2e27655a790f165b4eecdf4d349470eccbab3c62c",
+      "git_sha": "",
+      "spaces_url": null
+    },
+    {
+      "instrument_id": "nasdaq_msft",
+      "ticker": "MSFT",
+      "exchange": "NASDAQ",
+      "asset_class": "us",
+      "path": "us/nasdaq/msft/prices.csv",
+      "first_date": "2000-01-03",
+      "last_date": "2026-09-04",
+      "row_count": 6709,
+      "file_size": 419859,
+      "sha256": "7315890276d4b1cedabb0627aba9a3dac11a5fba2a422be1a9e0de1910dd4bed",
+      "git_sha": "",
+      "spaces_url": null
+    },
+    {
+      "instrument_id": "xetra_nem",
+      "ticker": "NEM.DE",
+      "exchange": "XETRA",
+      "asset_class": "eu",
+      "path": "eu/xetra/nem-de/prices.csv",
+      "first_date": "2000-01-03",
+      "last_date": "2026-09-04",
+      "row_count": 6817,
+      "file_size": 379214,
+      "sha256": "55289abf672052bae5ae9d3d168e05d7e6dc56d53efc27b88b4192cbd5182c6f",
+      "git_sha": "",
+      "spaces_url": null
+    }
+  ]
+}
